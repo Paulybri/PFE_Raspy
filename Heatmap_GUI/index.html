@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/mainStyle.css">
+    <title>HEATMAP</title>
+</head>
+<body>
+
+    <div id="sidenavOverlay"
+    onclick="closeNav()"></div>
+    
+
+    <!--Sidebar menu--------------------------------------------------------------------->
+    <div id="mySidenav" class="sidenav">
+        <img class="closeBtn" src="images/appbar.arrow.left.png" onclick="closeNav()">
+        <div class="header">           
+            <img src="images/dylogic_logo.png"/>
+        </div>
+        <hr style="width:80%;" />
+
+        
+    </div>
+
+    <div id="options">
+        <div class ="option">
+            <h2>Heat Range</h4>
+            <div>
+                <span>Max</span>
+                <input id="maxHeatRange"/>
+                <span>Amps</span>
+            </div>
+            <div>
+                <span>Min</span>
+                <input id="minHeatRange"/>
+                <span>Amps</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="map">
+        <!--div class="sensorWrapper">
+            <div class="sensor"></div>
+            <a class="indicator">10A</a>
+        </div>
+        <div class="sensorWrapper">
+            <div class="sensor"></div>
+            <a class="indicator">10A</a>
+        </div>
+        <div class="sensorWrapper">
+            <div class="sensor"></div>
+            <a class="indicator">10A</a>
+        </div-->
+    </div>
+  
+    <script src="scripts/resources/jquery-3.3.1.js"></script>  
+    <script src="scripts/index.js"></script>    
+
+</body>
+</html>
