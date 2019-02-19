@@ -17,8 +17,9 @@ def data_entry(db,timestamp,value):
 	db.commit()
 
 def read_all_db(db):
-	db.cursor().execute('SELECT * FROM amp')
-	data = db.cursor().fetchall()
+	cursor = db.cursor()
+	cursor.execute("SELECT * FROM 'amp'")
+	data = cursor.fetchall()
 	return data
 
 # FLASK APP ----------------------------
@@ -29,7 +30,7 @@ app = Flask(__name__)
 def index():
 	db = get_db()
 	db.cursor().execute('CREATE TABLE IF NOT EXISTS amp(timestamp REAL, value REAL)')
-	data_entry(db, 001, 111)
+	data_entry(db, 001, 131)
 	data = read_all_db(db)
 	print(data)
 	return render_template('index.html')
