@@ -2,13 +2,20 @@ from __future__ import print_function
 from flask import Flask, render_template, g
 import sqlite3
 import serial
+import time
+import struct
 
 ser = serial.Serial('/dev/ttyACM0', 9600)
 
-with serial.Serial('/dev/ttyS1', 19200, timeout=1) as ser:
+while 1 :
+	
+	ser.write('' + struct.pack('!B',255))
+	time.sleep(0.01)
 	x = ser.read()          # read one byte
-	if x = 7 :
+	if x != 0 :
 		print('DATA RECIVED FROM ARDUINO =', x)
+		
+	time.sleep(1)
 
 # SQLITE FUNCTIONS ----------------------
 
