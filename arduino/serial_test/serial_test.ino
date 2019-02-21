@@ -21,16 +21,22 @@ void loop() {
           int ampValue;
           switch (incomingByte) {
             case 0x41:              
-              ampValue = 1;
+              ampValue = 10;
             case 0x42:              
-              ampValue = 2;
+              ampValue = 20;
             case 0x43:              
-              ampValue = 3;
+              ampValue = 30;
             case 0x44:              
-              ampValue = 4;            
+              ampValue = 40;            
           }
     
           Serial.write(timestamp);
           Serial.write(ampValue);
+          Serial.write(timestamp);
+          Serial.write(ampValue+1)
+          Serial.write(timestamp);
+          Serial.write(ampValue+2)
+          Serial.write(timestamp);
+          Serial.write(ampValue+3)
   }
 }
