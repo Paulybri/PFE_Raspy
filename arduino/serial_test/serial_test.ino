@@ -14,7 +14,7 @@ void loop() {
           incomingByte = Serial.read();
 
           if (incomingByte == 255) {
-            Serial.println(150);
+            Serial.write(150);
           }
   }
 }
