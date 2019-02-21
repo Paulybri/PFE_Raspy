@@ -30,13 +30,13 @@ void loop() {
               ampValue = 40;            
           }
     
-          Serial.write(timestamp);
+          Serial.write(timeStamp);
           Serial.write(ampValue);
-          Serial.write(timestamp);
-          Serial.write(ampValue+1)
-          Serial.write(timestamp);
-          Serial.write(ampValue+2)
-          Serial.write(timestamp);
-          Serial.write(ampValue+3)
+          Serial.write(timeStamp);
+          Serial.write(ampValue+1);
+          Serial.write(timeStamp);
+          Serial.write(ampValue+2);
+          Serial.write(timeStamp);
+          Serial.write(ampValue+3);
   }
 }
