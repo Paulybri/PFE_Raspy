@@ -1,5 +1,5 @@
 int incomingByte = 0;
-int timeStamp = 0;
+uint32_t timeStamp = 0;
 int timeStampCounter = 0;
 void setup() {
   // put your setup code here, to run once:
@@ -29,14 +29,26 @@ void loop() {
             case 0x44:              
               ampValue = 40;            
           }
-    
-          Serial.write(timeStamp);
+          uint8_t ts[4];
+          ts[0] = timeStamp;
+          ts[1] = timeStamp >>  8;
+          ts[2] = timeStamp >> 16;
+          ts[3] = timeStamp >> 24;
+          
+          Serial.write(incomingByte);
+          
+          Serial.write(ts, 4);
           Serial.write(ampValue);
-          Serial.write(timeStamp);
+
+          Serial.write(ts, 4);
           Serial.write(ampValue+1);
-          Serial.write(timeStamp);
+
+          Serial.write(ts, 4);
           Serial.write(ampValue+2);
-          Serial.write(timeStamp);
+
+          Serial.write(ts, 4);
           Serial.write(ampValue+3);
+
+
   }
 }
