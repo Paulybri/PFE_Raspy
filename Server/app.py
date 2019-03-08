@@ -29,9 +29,9 @@ def read_all_db(db):
 	return data
 
 # COMMUNICATION FUNCTIONS --------------
-#port = '/dev/ttyAMA0' #GPIO UART
-port = '/dev/ttyACM0' #USB PORT
-ser = serial.Serial(port, 9600, timeout = 1)
+port = '/dev/ttyAMA0' #GPIO UART
+#port = '/dev/ttyACM0' #USB PORT
+ser = serial.Serial(port, 9600, timeout = 1, writeTimeout = 1)
 
 ucAddresses = [0x41,0x42,0x43,0x44]
 
@@ -53,6 +53,11 @@ def uc_probe_and_store(ucAddress):
 		print("uC didn't send correct response")
 		print("Expected :",ucAddress)
 		print("Recieved :", hex(ord(response)))
+
+def read_serial_and_print():
+	#ser.reset_input_buffer()
+	response  = ser.read(4)
+	print('Data recieved: ', response);
 
 # FLASK APP ----------------------------
 POOL_TIME = 5 #Seconds
@@ -77,6 +82,7 @@ def probe():
 		print('Probing uCs')
 		for i in ucAddresses:
 			uc_probe_and_store(i)
+			#read_serial_and_print()
 		
 	# Set the next thread to happen
 	probingThread = threading.Timer(POOL_TIME, probe, ())
@@ -100,5 +106,3 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
-
-
