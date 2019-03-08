@@ -29,7 +29,9 @@ def read_all_db(db):
 	return data
 
 # COMMUNICATION FUNCTIONS --------------
-ser = serial.Serial('/dev/ttyACM0', 9600, timeout = 1)
+#port = '/dev/ttyAMA0' #GPIO UART
+port = '/dev/ttyACM0' #USB PORT
+ser = serial.Serial(port, 9600, timeout = 1)
 
 ucAddresses = [0x41,0x42,0x43,0x44]
 
