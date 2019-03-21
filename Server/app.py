@@ -1,5 +1,5 @@
 from __future__ import print_function
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, jsonify
 import sqlite3
 import serial
 import time
@@ -8,6 +8,9 @@ import struct
 import threading
 import atexit
 import math
+
+#global sensorNo = 4
+#global uCNo = 2
 
 # SQLITE FUNCTIONS ----------------------
 
@@ -35,8 +38,11 @@ def read_all_db(db):
 port = '/dev/ttyUSB0' #USB PORT
 
 ucAddresses = [0x41]
+sensorsPerUc = 1
+global currentArray
+currentArray = [len(ucAddresses)*sensorsPerUc]
 
-def uc_probe_and_store(ucAddress):
+def uc_probe_and_store(ucAddress, uCIndex):
 	ser = serial.Serial(
 	port=port,\
 	baudrate=9600,\
@@ -49,11 +55,14 @@ def uc_probe_and_store(ucAddress):
 	response  = ser.read(1)
 	if response == ('' + struct.pack('!B',ucAddress)) :
 		print('Recieved acknowledgment from uC')
-		for i in range(1,2):#(1,5):
+		for i in range(0,1):#(0,4):
 			timeStamp = datetime.datetime.now()
 			variance = struct.unpack('!H',ser.read(2))
 			standDev = math.sqrt(variance[0])
-			current = (standDev-17.252)/2.5464
+			global current
+			current = (standDev*0.1865)-0.5857
+			global currentArray
+			currentArray[uCIndex*sensorsPerUc + i] = current
 			data_entry(get_db(),timeStamp, ucAddress, i, current)
 			print('sensor #',i)
 			print('timeStamp: ', timeStamp)
@@ -91,8 +100,8 @@ def probe():
 		db = get_db()
 		db.cursor().execute('CREATE TABLE IF NOT EXISTS amp(timestamp STRING, uc INT, sensor INT, current REAL)')
 		print('Probing uCs')
-		for i in ucAddresses:
-			uc_probe_and_store(i)
+		for i in range(0,len(ucAddresses)):
+			uc_probe_and_store(ucAddresses[i],i)
 		
 	# Set the next thread to happen
 	probingThread = threading.Timer(POOL_TIME, probe, ())
@@ -102,6 +111,10 @@ def probe():
 probe()
 # When you kill Flask (SIGTERM), clear the trigger for the next thread
 atexit.register(interrupt)
+
+@app.route('/background_process')
+def background_process():
+	return jsonify(currentArray = currentArray)
 
 @app.route('/')
 def index():

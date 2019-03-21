@@ -1,11 +1,15 @@
 window.onload = function WindowLoad(event) {
-    initMap(11);
+    initMap(8);
 }
 
 window.setInterval(function(){
   /// call your function here
   $.getJSON("./background_process",{},function(result){
-    updateSensor(result.idx,result.ampValue);
+      console.log(result.currentArray);
+    for (i = 0; i < result.currentArray.length; i++){
+      
+        updateSensor(i,result.currentArray[i]);
+    }
   });
 }, 1000);
 
@@ -27,17 +31,16 @@ function initMap(sensorCount){
              '</div>');
             amp_data.push(0);
       })();
-      updateSensor(i, i)
+      updateSensor(i, 0)
     }
 }
 
 function updateSensor(sensorIdx, ampValue) {
-
     sensors = document.getElementsByClassName("sensor");
     indicator = document.getElementsByClassName("indicator");
 
     sensors[sensorIdx].style.background = heatMapColorforValue(ampValue);
-    indicator[sensorIdx].text = "" + ampValue + " A";
+    indicator[sensorIdx].text = "" + ampValue.toFixed(2) + " A";
     amp_data[sensorIdx] = ampValue
 }
 
