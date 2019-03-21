@@ -2,6 +2,13 @@ window.onload = function WindowLoad(event) {
     initMap(11);
 }
 
+window.setInterval(function(){
+  /// call your function here
+  $.getJSON("./background_process",{},function(result){
+    updateSensor(result.idx,result.ampValue);
+  });
+}, 1000);
+
 MAX_AMP = 10;
 MIN_AMP = 0;
 

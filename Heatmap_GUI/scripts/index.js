@@ -1,6 +1,32 @@
 window.onload = function WindowLoad(event) {
     initMap(11);
+    const sqlite3 = require('sqlite3').verbose();
+ 
+    // open the database
+    let db = new sqlite3.Database('../../database.db');
+     
+    let sql = `SELECT current FROM amp
+               ORDER BY current`;
+     
+    db.all(sql, [], (err, rows) => {
+      if (err) {
+        throw err;
+      }
+      rows.forEach((row) => {
+        console.log(row.name);
+      });
+      });
+       
+      // close the database connection
+      db.close();
 }
+
+window.setInterval(function(){
+  /// call your function here
+  $.getJSON("./background_process",{},function(result){
+    updateSensor(result.idx,result.ampValue);
+  });
+}, 1000);
 
 MAX_AMP = 10;
 MIN_AMP = 0;
