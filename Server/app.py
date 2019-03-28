@@ -37,10 +37,11 @@ def read_all_db(db):
 #port = '/dev/ttyACM0' #USB PORT
 port = '/dev/ttyUSB0' #USB PORT
 
-ucAddresses = [0x41]
-sensorsPerUc = 1
+ucAddresses = [0x41, 0x42]
+sensorsPerUc = 4
 global currentArray
-currentArray = [len(ucAddresses)*sensorsPerUc]
+#currentArray = [len(ucAddresses)*sensorsPerUc]
+#print('lenght: ',len(currentArray))
 
 def uc_probe_and_store(ucAddress, uCIndex):
 	ser = serial.Serial(
@@ -54,33 +55,34 @@ def uc_probe_and_store(ucAddress, uCIndex):
 	ser.write('' + struct.pack('!B',ucAddress))
 	response  = ser.read(1)
 	if response == ('' + struct.pack('!B',ucAddress)) :
-		print('Recieved acknowledgment from uC')
-		for i in range(0,1):#(0,4):
+		#print('Recieved acknowledgment from uC')
+		for i in range(0,4):#(0,4):
 			timeStamp = datetime.datetime.now()
 			variance = struct.unpack('!H',ser.read(2))
 			standDev = math.sqrt(variance[0])
 			global current
 			current = (standDev*0.1865)-0.5857
 			global currentArray
-			currentArray[uCIndex*sensorsPerUc + i] = current
+			currentArray.append(current)
 			data_entry(get_db(),timeStamp, ucAddress, i, current)
-			print('sensor #',i)
-			print('timeStamp: ', timeStamp)
-			print('standard deviation: ', standDev)
-			print('current: ',current)
-			print('\n')
+			#print('sensor #',i)
+			#print('timeStamp: ', timeStamp)
+			#print('standard deviation: ', standDev)
+			#print('current: ',current)
+			#print('\n')
+		#print('________________________________\n')
 				
 	else:
 		if len(response) > 0:
 			print("uC didn't send correct response")
-			print("Expected :",ucAddress)
-			print("Recieved :", hex(ord(response)))
+			#print("Expected :",ucAddress)
+			#print("Recieved :", hex(ord(response)))
 		else:
 			print("Delay expired, no response")
 	ser.close()
 
 # FLASK APP ----------------------------
-POOL_TIME = 2 #Seconds
+POOL_TIME = 0.2 #Seconds
 
 # lock to control access to variable
 dataLock = threading.Lock()
@@ -100,6 +102,8 @@ def probe():
 		db = get_db()
 		db.cursor().execute('CREATE TABLE IF NOT EXISTS amp(timestamp STRING, uc INT, sensor INT, current REAL)')
 		print('Probing uCs')
+		global currentArray
+		currentArray = []
 		for i in range(0,len(ucAddresses)):
 			uc_probe_and_store(ucAddresses[i],i)
 		
