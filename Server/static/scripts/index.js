@@ -1,5 +1,6 @@
 window.onload = function WindowLoad(event) {
     initMap(8);
+	panneau();
 }
 
 window.setInterval(function(){
