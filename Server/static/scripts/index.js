@@ -11,6 +11,8 @@ window.setInterval(function(){
       
         updateSensor(i,result.currentArray[i]);
     }
+    
+    updatePanneau(result.currentArray);
   });
 }, 200);
 
