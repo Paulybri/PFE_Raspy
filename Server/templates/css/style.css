@@ -1,0 +1,61 @@
+body, html, h2 {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+
+body {
+	font-family: Calibri, sans-serif;
+	background: #d4d4d4;
+}
+
+body * {
+	font-weight:200;
+}
+
+h2 {
+	width: 100%;
+	display: inline-block;
+	height: 60px;
+	text-align: center;
+}
+
+#header {
+	background: #ffffff;
+	height: 35px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#header a {
+	display: inline-block;
+	margin: 4px 20px 0 20px;
+	font-size: 20px;
+	color: black;
+	text-decoration: none;
+}
+
+#header a#page_courante {
+	text-decoration: underline;
+}
+
+.blocs {
+	width: 870px;
+	display: inline-block;
+	float: left;
+	background: #ffffff;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 0 30px 60px 30px;
+}
+
+#panneau {
+	width: 585px;
+	display: block;
+	margin: auto;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+#map {
+	padding: 0 120px;
+}
