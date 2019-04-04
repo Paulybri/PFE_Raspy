@@ -1,5 +1,6 @@
 window.onload = function WindowLoad(event) {
     initMap(8);
+	panneau();
 }
 
 window.setInterval(function(){
@@ -21,25 +22,18 @@ function initMap(sensorCount){
     var map = document.getElementById("map");
     map.innerHTML = '';
     console.log(map);
-	map.innerHTML += '<table>';
     for (var i = 0; i < sensorCount; i++) {
-
-			if (i == 0) {
-				map.innerHTML += '<tr>';
-			}
+        (function () {
+            var ii = i;
             map.innerHTML += 
-            ('<th class="sensorWrapper">'+
+            ('<div class="sensorWrapper">'+
                '<div class="sensor"></div>'+
                '<a class="indicator">-</a>'+
-             '</th>');
+             '</div>');
             amp_data.push(0);
-
+      })();
       updateSensor(i, 0)
-		if (i == sensorCount/2) {
-			map.innerHTML += '</tr><tr>';
-		}
     }
-	map.innerHTML += '</tr></table>';
 }
 
 function updateSensor(sensorIdx, ampValue) {

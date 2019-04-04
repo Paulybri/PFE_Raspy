@@ -8,40 +8,41 @@
   </head>
   <body>
 	<div id="header">
-		<a id="page_courante" href="">Tableau de bord</a>
-		<a href="">Disjoncteurs</a>
+		<a id="page_courante" href="./index.html">Tableau de bord</a>
+		<a href="./disjoncteurs.html">Disjoncteurs</a>
 		<a href="">Paramètres</a>
 	</div>
-	<table>
-		<tr>
-			<th>
-				<div id="bloc1" class="blocs">
-					<h2>Utilisation en temps réel</h2>
-					<div id="map">
-					</div>
-				</div>
-			<th>
-				<div id="bloc2" class="blocs">
-					<h2>Utilisation par heure</h2>
-				</div>
-			</th>
-		</tr>
-<!--
-		<tr>
-			<th>
-				<div id="bloc3" class="blocs">
-				</div>
-			</th>
-			<th>
-				<div id="bloc4" class="blocs">
-					
-				</div>
-			</th>
-		</tr>
--->
-	</table>
+	
+		<div id="bloc1" class="blocs">
+			<h2>Utilisation en temps réel</h2>
+			<div id="heatmapContainer">
+				<img id="panneau" src="./images/disjoncteurs_effect.png" alt="">
+			</div>
+		</div>
+		
+		<div id="bloc2" class="blocs">
+			<h2>Utilisation en temps réel</h2>
+			<div id="map">
+			</div>
+		</div>
+		
+		<div id="bloc3" class="blocs">
+			<h2>Utilisation par heure</h2>
+			<h2>Cuisine</h2>
+			<input type="range" min="1" max="100" value="0" id="cuisine">
+			<h2>Salon</h2>
+			<input type="range" min="1" max="100" value="0" id="salon">
+			<h2>Salle de bain</h2>
+			<input type="range" min="1" max="100" value="0" id="salleBain">
+			<h2>Chambre 1</h2>
+			<input type="range" min="1" max="100" value="0" id="chambre1">
+			<h2>Chambre 2</h2>
+			<input type="range" min="1" max="100" value="0" id="chambre2">
+		</div>
 	
 	<script src="resources/jquery-3.3.1.js"></script>
+	<script src="resources/heatmap.js"></script>
+	<script src="resources/script_panneau.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

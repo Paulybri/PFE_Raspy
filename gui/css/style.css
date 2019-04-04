@@ -14,8 +14,10 @@ body * {
 }
 
 h2 {
+	width: 100%;
 	display: inline-block;
 	height: 60px;
+	text-align: center;
 }
 
 #header {
@@ -36,21 +38,24 @@ h2 {
 	text-decoration: underline;
 }
 
-table {
-	width: 100%;
-}
-
-table tr {
-	
-}
-
-table th {
-	width: 50%;
-}
-
 .blocs {
+	width: 870px;
+	display: inline-block;
+	float: left;
 	background: #ffffff;
-	height: 300px;
 	border-radius: 5px;
 	margin: 10px;
+	padding: 0 30px 60px 30px;
+}
+
+#panneau {
+	width: 585px;
+	display: block;
+	margin: auto;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+#map {
+	padding: 0 120px;
 }
