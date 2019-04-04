@@ -12,7 +12,7 @@ window.setInterval(function(){
         updateSensor(i,result.currentArray[i]);
     }
   });
-}, 1000);
+}, 200);
 
 MAX_AMP = 10;
 MIN_AMP = 0;
