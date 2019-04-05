@@ -6,7 +6,7 @@ window.onload = function WindowLoad(event) {
 window.setInterval(function(){
   /// call your function here
   $.getJSON("./background_process",{},function(result){
-      console.log(result.currentArray);
+      //console.log(result.currentArray);
     for (i = 0; i < result.currentArray.length; i++){
       
         updateSensor(i,result.currentArray[i]);
@@ -23,7 +23,7 @@ function initMap(sensorCount){
     amp_data = []
     var map = document.getElementById("map");
     map.innerHTML = '';
-    console.log(map);
+    //console.log(map);
     for (var i = 0; i < sensorCount; i++) {
         (function () {
             var ii = i;
@@ -45,6 +45,12 @@ function updateSensor(sensorIdx, ampValue) {
     sensors[sensorIdx].style.background = heatMapColorforValue(ampValue);
     indicator[sensorIdx].text = "" + ampValue.toFixed(2) + " A";
     amp_data[sensorIdx] = ampValue
+    
+    if(ampValue > MAX_AMP) {
+        MAX_AMP = ampValue;
+        refreshStrip();
+    }
+    
 }
 
 function refreshStrip() {
