@@ -8,27 +8,24 @@
   </head>
   <body>
 	<div id="header">
-		<a id="page_courante" href="/index.html">Tableau de bord</a>
-		<a href="/parametres.html">Paramètres</a>
+		<a href="/index.html">Tableau de bord</a>
+		<a id="page_courante" href="/parametres.html">Paramètres</a>
 	</div>
 	
 		<div id="bloc1" class="blocs">
-			<h2>Utilisation en temps réel</h2>
-			<div id="heatmapContainer">
-				<img id="panneau" src="/static/images/disjoncteurs_effect.png" alt="">
+			<h2>Paramètres</h2>
+			<h3>Heat Range</h3>
+			<div>
+				<span>Max</span>
+				<input id="maxHeatRange"/>
+				<span>Amps</span>
+			</div>
+			<div>
+				<span>Min</span>
+				<input id="minHeatRange"/>
+				<span>Amps</span>
 			</div>
 		</div>
-		
-		<div id="bloc2" class="blocs">
-			<h2>Utilisation en temps réel</h2>
-			<div id="map">
-			</div>
-		</div>
-		
-		<div id="bloc3" class="blocs">
-			<h2>Utilisation par heure</h2>
-		</div>
-	
 	<script src="/static/scripts/resources/jquery-3.3.1.js"></script>
 	<script src="/static/scripts/resources/heatmap.js"></script>
     <script src="/static/scripts/index.js"></script>
