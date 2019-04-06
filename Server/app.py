@@ -61,7 +61,7 @@ def uc_probe_and_store(ucAddress, uCIndex):
 			variance = struct.unpack('!H',ser.read(2))
 			standDev = math.sqrt(variance[0])
 			global current
-			current = (standDev*0.1865)-0.5857
+			current = (standDev*0.235)-0.5857
 			global currentArray
 			currentArray.append(current)
 			data_entry(get_db(),timeStamp, ucAddress, i, current)
@@ -73,16 +73,16 @@ def uc_probe_and_store(ucAddress, uCIndex):
 		#print('________________________________\n')
 				
 	else:
-		if len(response) > 0:
-			print("uC didn't send correct response")
+		#if len(response) > 0:
+			#print("uC didn't send correct response")
 			#print("Expected :",ucAddress)
 			#print("Recieved :", hex(ord(response)))
-		else:
-			print("Delay expired, no response")
+		#else:
+		print("Delay expired, no response")
 	ser.close()
 
 # FLASK APP ----------------------------
-POOL_TIME = 0.2 #Seconds
+POOL_TIME = 1 #Seconds
 
 # lock to control access to variable
 dataLock = threading.Lock()
@@ -101,7 +101,7 @@ def probe():
 
 		db = get_db()
 		db.cursor().execute('CREATE TABLE IF NOT EXISTS amp(timestamp STRING, uc INT, sensor INT, current REAL)')
-		print('Probing uCs')
+		#print('Probing uCs')
 		global currentArray
 		currentArray = []
 		for i in range(0,len(ucAddresses)):
@@ -115,6 +115,10 @@ def probe():
 probe()
 # When you kill Flask (SIGTERM), clear the trigger for the next thread
 atexit.register(interrupt)
+	
+@app.route('/parametres', methods=['GET', 'POST'])
+def parametres():
+	return render_template('parametres.html')	
 
 @app.route('/background_process')
 def background_process():
@@ -122,7 +126,6 @@ def background_process():
 
 @app.route('/')
 def index():
-	
 	return render_template('index.html')
 
 if __name__ == '__main__':

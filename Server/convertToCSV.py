@@ -1,11 +1,14 @@
 import sqlite3
+import csv
 
-with open('./database.csv', 'w+') as write_file:
-# open a file to write to
-    conn = sqlite3.connect('./database.db')
-    # connect to your database
-    cursor = conn.cursor()
-    # create a cursor object (which lets you address the table results individually)
-    for row in cursor.execute('SELECT * FROM amp'):
-    # use the cursor as an iterable
-        write_file.write(row)
+with sqlite3.connect("database.db") as connection:
+    print("opened db")
+    csvWriter = csv.writer(open("database.csv", "w"))
+    c = connection.cursor()
+
+    #rows = c.fetchall()
+    rows = c.execute('SELECT * from amp')
+    print('exporting...')
+    for x in rows:
+        csvWriter.writerow(x)
+    print('done')

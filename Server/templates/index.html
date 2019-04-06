@@ -8,8 +8,8 @@
   </head>
   <body>
 	<div id="header">
-		<a id="page_courante" href="/index.html">Tableau de bord</a>
-		<a href="/parametres.html">Paramètres</a>
+		<a id="page_courante" href="{{ url_for('index') }}">Tableau de bord</a>
+		<a href="{{ url_for('parametres') }}">Paramètres</a>
 	</div>
 	
 		<div id="bloc1" class="blocs">
@@ -23,10 +23,6 @@
 			<h2>Utilisation en temps réel</h2>
 			<div id="map">
 			</div>
-		</div>
-		
-		<div id="bloc3" class="blocs">
-			<h2>Utilisation par heure</h2>
 		</div>
 	
 	<script src="/static/scripts/resources/jquery-3.3.1.js"></script>

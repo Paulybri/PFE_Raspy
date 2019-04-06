@@ -8,27 +8,26 @@
   </head>
   <body>
 	<div id="header">
-		<a href="/index.html">Tableau de bord</a>
-		<a id="page_courante" href="/parametres.html">Paramètres</a>
+		<a href="{{ url_for('index') }}">Tableau de bord</a>
+		<a id="page_courante" href="{{ url_for('parametres') }}">Paramètres</a>
 	</div>
 	
 		<div id="bloc1" class="blocs">
 			<h2>Paramètres</h2>
 			<h3>Heat Range</h3>
-			<div>
+			<form action="">
 				<span>Max</span>
-				<input id="maxHeatRange"/>
-				<span>Amps</span>
-			</div>
-			<div>
+				<input type="text" id="maxHeatRange" value=10>
+				<span>Ampères</span></br>
 				<span>Min</span>
-				<input id="minHeatRange"/>
-				<span>Amps</span>
-			</div>
+				<input type="text" id="minHeatRange"/ value=0>
+				<span>Ampères</span></br>
+				<input type="button" onclick="setMinMax()" value="Ok"/>
+			</form>
 		</div>
 	<script src="/static/scripts/resources/jquery-3.3.1.js"></script>
 	<script src="/static/scripts/resources/heatmap.js"></script>
-    <script src="/static/scripts/index.js"></script>
+	<script src="/static/scripts/index.js"></script>
 	<script src="/static/scripts/script_panneau.js"></script>
   </body>
 </html>

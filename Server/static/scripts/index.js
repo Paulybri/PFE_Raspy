@@ -6,17 +6,16 @@ window.onload = function WindowLoad(event) {
 window.setInterval(function(){
   /// call your function here
   $.getJSON("./background_process",{},function(result){
-      //console.log(result.currentArray);
     for (i = 0; i < result.currentArray.length; i++){
       
         updateSensor(i,result.currentArray[i]);
     }
-    
     updatePanneau(result.currentArray);
+
   });
 }, 200);
 
-MAX_AMP = 10;
+MAX_AMP = 8;
 MIN_AMP = 0;
 
 function initMap(sensorCount){
@@ -47,14 +46,13 @@ function updateSensor(sensorIdx, ampValue) {
     amp_data[sensorIdx] = ampValue
     
     if(ampValue > MAX_AMP) {
-        MAX_AMP = ampValue;
-        refreshStrip();
+        //MAX_AMP = ampValue;
+        //refreshStrip();
     }
     
 }
 
 function refreshStrip() {
-
     for(var i = 0; i < amp_data.length; i++) {
       updateSensor(i, amp_data[i]);
     }
@@ -64,6 +62,11 @@ function heatMapColorforValue(value){
   var h = 
     (1.0 - Math.min(Math.max(value-MIN_AMP,0)/(MAX_AMP-MIN_AMP),1)) * 240
   return "hsl(" + h + ", 100%, 50%)";
+}
+
+function setMinMax() {
+    MAX_AMP = document.getElementById("maxHeatRange").value;
+    MIN_AMP = document.getElementById("minHeatRange").value;
 }
 
 var maxHeatRange = document.getElementById("maxHeatRange");
