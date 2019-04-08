@@ -6,6 +6,9 @@ function panneau() {
 	var sliderSalleBain = document.getElementById("salleBain");
 	var sliderChambre1 = document.getElementById("chambre1");
 	var sliderChambre2 = document.getElementById("chambre2");
+	var slider6 = document.getElementById("slider6");
+	var slider7 = document.getElementById("slider7");
+	var slider8 = document.getElementById("slider8");
 
 	// create a heatmap instance
 	var heatmap = h337.create({
@@ -40,24 +43,24 @@ function panneau() {
 	d4[2] = {x:250, y:214, value:0};
 	
 	var d5 = new Array(3);
-	d5[0] = {x:200, y:272, value:0};
-	d5[1] = {x:225, y:272, value:0};
-	d5[2] = {x:250, y:272, value:0};
+	d5[0] = {x:200, y:270, value:0};
+	d5[1] = {x:225, y:270, value:0};
+	d5[2] = {x:250, y:270, value:0};
 	
 	var d6 = new Array(3);
-	d6[0] = {x:200, y:275, value:0};
-	d6[1] = {x:225, y:275, value:0};
-	d6[2] = {x:250, y:275, value:0};
+	d6[0] = {x:200, y:325, value:0};
+	d6[1] = {x:225, y:325, value:0};
+	d6[2] = {x:250, y:325, value:0};
 	
 	var d7 = new Array(3);
-	d7[0] = {x:200, y:275, value:0};
-	d7[1] = {x:225, y:275, value:0};
-	d7[2] = {x:250, y:275, value:0};
+	d7[0] = {x:200, y:380, value:0};
+	d7[1] = {x:225, y:380, value:0};
+	d7[2] = {x:250, y:380, value:0};
 	
 	var d8 = new Array(3);
-	d8[0] = {x:200, y:275, value:0};
-	d8[1] = {x:225, y:275, value:0};
-	d8[2] = {x:250, y:275, value:0};
+	d8[0] = {x:200, y:442, value:0};
+	d8[1] = {x:225, y:442, value:0};
+	d8[2] = {x:250, y:442, value:0};
 
 	var i = 0;
 	var datas = [];
@@ -170,4 +173,71 @@ function panneau() {
 		  data: datas
 		});
 	}
+
+	slider6.oninput = function() {
+		datas = [];
+		for(i=0; i < 3; i++) {
+			console.log(d2[i]);
+			d6[i]["value"] = slider6.value;
+			datas.push(d1[i]);
+			datas.push(d2[i]);
+			datas.push(d3[i]);
+			datas.push(d4[i]);
+			datas.push(d5[i]);
+			datas.push(d6[i]);
+			datas.push(d7[i]);
+			datas.push(d8[i]);
+		}
+		
+		heatmap.setData({
+		  min: 0,
+		  max: 100,
+		  data: datas
+		});
+	}
+
+	slider7.oninput = function() {
+		datas = [];
+		for(i=0; i < 3; i++) {
+			console.log(d2[i]);
+			d7[i]["value"] = slider7.value;
+			datas.push(d1[i]);
+			datas.push(d2[i]);
+			datas.push(d3[i]);
+			datas.push(d4[i]);
+			datas.push(d5[i]);
+			datas.push(d6[i]);
+			datas.push(d7[i]);
+			datas.push(d8[i]);
+		}
+		
+		heatmap.setData({
+		  min: 0,
+		  max: 100,
+		  data: datas
+		});
+	}
+
+	slider8.oninput = function() {
+		datas = [];
+		for(i=0; i < 3; i++) {
+			console.log(d2[i]);
+			d8[i]["value"] = slider8.value;
+			datas.push(d1[i]);
+			datas.push(d2[i]);
+			datas.push(d3[i]);
+			datas.push(d4[i]);
+			datas.push(d5[i]);
+			datas.push(d6[i]);
+			datas.push(d7[i]);
+			datas.push(d8[i]);
+		}
+		
+		heatmap.setData({
+		  min: 0,
+		  max: 100,
+		  data: datas
+		});
+	}
+	
 }
